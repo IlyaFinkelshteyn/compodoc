@@ -2,10 +2,7 @@ branches:
   only:
     - develop
 
-image: Previous Visual Studio 2015
-
-init:
-  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+#image: Previous Visual Studio 2015
 
 environment:
   nodejs_version: '6'
@@ -16,6 +13,7 @@ environment:
   #  - nodejs_version: '9'
   #  - nodejs_version: '10'
 install:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: Install-Product node $env:nodejs_version
   - set CI=true
   - npm install
